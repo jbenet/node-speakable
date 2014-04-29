@@ -1,15 +1,22 @@
 {
-    "name": "speakable",
-    "description": "A continuous speech recognition module for node.js.",
-    "author": {
-      "name": "Sascha Reuter",
-      "email": "sascha@tape.io"
-    },
-    "contributors": [
-      {
-        "name":"Vittorio Banfi",
-        "email":"vittorio.banfi@gmail.com"
-      }
-    ],
-    "version":"0.3.0"
+  "name": "speakable-toggle",
+  "description": "A toggled speech recognition module for node.js.",
+  "author": {
+    "name": "Juan Benet",
+    "email": "juan@benet.ai"
+  },
+  "contributors": [
+    {
+    "name": "Sascha Reuter",
+    "email": "sascha@tape.io"
+    },{
+      "name": "Vittorio Banfi",
+      "email": "vittorio.banfi@gmail.com"
+    }
+  ],
+  "version": "0.3.0",
+  "readme": "# node-speakable\n\nDemo video on what you can achieve using node-speakable: https://my.doctape.com/s/NLHn1z\n\n## Description\n\n**node-speakable** is a continuous speech recognition module for node.js.\n\nBasically, **node-speakable** is continuous waiting for you to say something and waits until you finally stopped talking. It then emits an ```speechResult``` event with an ```Array()``` including of your ```recognizedWords```. You can then ```.indexOf()``` the array to trigger some awesome action to happen, like turning on your ```Philips Hue``` lights.\n\nIf you ever talked to your XBOX360 (kinect) you're already familiar on how a continuous speech recognition system works for you.\n\n## How\n\nIt's pure JavaScript magic... Ok, not yet! Currently node-speakable needs you to __put a binary of ```sox```__ into the modules (into lib) folder to do the recording. The actual voice recognition is then achieved trough a POST to the the Google Speech API.\n\n## Example usage (node example.js)\n\n```javascript\nvar Speakable = require('./');\n\nvar speakable = new Speakable();\n```\nBy default, the language is American English ( 'en-US' ), but you can specify another language in the options.\nExample usage:\n```javascript\nvar speakable = new Speakable({lang: 'it-IT'});\n```\n\n```javascript\nspeakable.on('speechStart', function() {\n  console.log('onSpeechStart');\n});\n\nspeakable.on('speechStop', function() {\n  console.log('onSpeechStop');\n});\n\nspeakable.on('speechReady', function() {\n  console.log('onSpeechReady');\n});\n\nspeakable.on('error', function(err) {\n  console.log('onError:');\n  console.log(err);\n  speakable.recordVoice();\n});\n\nspeakable.on('speechResult', function(recognizedWords) {\n  console.log('onSpeechResult:')\n  console.log(recognizedWords);\n  speakable.recordVoice();\n});\n\nspeakable.recordVoice();\n```\n\n## License\n\n**node-speakable** is licensed under the MIT license.\n\n## Todo / Ideas\n\n* Allow overwrite of speakable’s defaults (sox path & parameters, etc.)\n* Limit maximum listening time\n",
+  "readmeFilename": "README.md",
+  "_id": "speakable@0.3.0",
+  "_from": "speakable@~0.3.0"
 }
